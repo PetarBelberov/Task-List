@@ -1,0 +1,163 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  font-size: 120%;
+  background: #F8F8FF;
+}
+
+.header {
+	width: 30%;
+	margin: 50px auto 0px;
+	color: #908c8c;
+	background: #ffc10794;
+	text-align: center;
+	border: 1px solid #B0C4DE;
+	/* border-bottom: none; */
+	border-radius: 10px 10px 10px 10px;
+	padding: 20px;
+}
+form, .content {
+  width: 30%;
+  margin: 0px auto;
+  padding: 20px;
+  border: 1px solid #B0C4DE;
+  background: white;
+  border-radius: 0px 0px 10px 10px;
+}
+.input-group {
+  margin: 10px 0px 10px 0px;
+}
+.input-group label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+}
+.input-group input {
+  height: 30px;
+  width: 93%;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.btn {
+  padding: 10px;
+  font-size: 15px;
+  color: #908c8c;
+  background: #ffc10794;
+  border: none;
+  border-radius: 5px;
+}
+.error {
+  width: 92%; 
+  margin: 0px auto; 
+  padding: 10px; 
+  border: 1px solid #a94442; 
+  color: #a94442; 
+  background: #f2dede; 
+  border-radius: 5px; 
+  text-align: left;
+}
+.success {
+  color: #3c763d; 
+  background: #dff0d8; 
+  border: 1px solid #3c763d;
+  margin-bottom: 20px;
+}
+
+//
+
+.heading{
+	width: 50%;
+	margin: 30px auto;
+	text-align: center;
+	color: 	#6B8E23;
+	background: #FFF8DC;
+	border: 2px solid #6B8E23;
+	border-radius: 20px;
+}
+form {
+	width: 50%; 
+	margin: 30px auto; 
+	border-radius: 5px; 
+	padding: 10px;
+	background: #FFF8DC;
+	border: 1px solid #6B8E23;
+}
+form p {
+	color: red;
+	margin: 0px;
+}
+.task_input {
+	width: 60%;
+	height: 15px; 
+	padding: 10px;
+	border: 2px solid #6B8E23;
+}
+.button {
+	color: 	#6B8E23;
+	border-radius: 5px; 
+	padding: 5px 5px;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+#add_btn, #update_btn  {
+	width: 45px;
+	height: 39px;
+    background: #FFF8DC;
+    border: 2px solid #6b8e2385;
+	margin-left: 10px;
+}
+
+
+
+#edit_btn, #delete_btn {
+    background: transparent;
+    border: none;
+    height: 31px;
+    width: 34px;
+}
+
+#edit_btn:hover, #delete_btn:hover {
+	background: #8bc34a3b;
+}
+
+#add_btn:hover, #update_btn:hover {
+	background: white;
+}
+
+table {
+    width: 50%;
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+tr {
+	border-bottom: 1px solid #cbcbcb;
+}
+
+th {
+	font-size: 19px;
+	color: #6B8E23;
+}
+
+th, td{
+	border: none;
+    height: 30px;
+    padding: 2px;
+}
+
+tr:hover {
+	background: #E9E9E9;
+}
+
+.task {
+	text-align: left;
+}
+
+.delete{
+	text-align: center;
+}
