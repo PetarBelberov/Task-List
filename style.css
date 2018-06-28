@@ -58,8 +58,43 @@ form, .content {
   color: #a94442; 
   background: #f2dede; 
   border-radius: 5px; 
-  text-align: left;
+  text-align: center;
 }
+
+.successReg {
+  width: 92%; 
+  margin: 0px auto; 
+  padding: 10px; 
+  border: 1px solid #382b05; 
+  background: #908c8ca6;
+  border-radius: 5px; 
+  text-align: center;
+}
+
+.successReg p {
+  color: #382b05;
+}
+
+#alertActivate {
+   width: 92%;
+   margin: 0px auto;
+   padding: 10px;
+   border: 1px solid #2e8832;
+   background: #4caf5091;
+   border-radius: 5px;
+   text-align: center;
+   margin-top: 10px;
+}
+
+#alertActivate p {
+   color: #1c611f;
+   font-weight: bold;
+}
+
+#alertActivate a {
+   color: #1c611f;
+}
+
 .success {
   color: #3c763d; 
   background: #dff0d8; 

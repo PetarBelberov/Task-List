@@ -1,3 +1,4 @@
+<?php include('server.php'); ?>
 <!DOCTYPE html>
 
 <html>
@@ -10,8 +11,9 @@
   	<h2>Register</h2>
   </div>
 	
-  <form method="post" action="login.php" onsubmit="return validateForm();">
-  	
+  <form method="post" action="register.php">
+	<?php include('errors.php'); ?>
+	<?php include('verificationMessage.php'); ?>
   	<div class="input-group">
   	  <label>Username</label>
   	  <input type="text" name="username" id="username" value="">
@@ -36,60 +38,5 @@
   	</p>
   </form>
 </body>
-
-<script type="text/javascript">
-  function validateForm() {
-
-    var your_name = $.trim($("#username").val());
-    var your_email = $.trim($("#email").val());
-    var pass1 = $.trim($("#password_1").val());
-    var pass2 = $.trim($("#password_2").val());
-
-
-    // validate name
-    if (your_name == "") {
-      alert("Enter your name.");
-      $("#username").focus();
-      return false;
-    } else if (your_name.length < 3) {
-      alert("Name must be atleast 3 character.");
-      $("#uname").focus();
-      return false;
-    }
-
-    // validate email
-    if (!isValidEmail(your_email)) {
-      alert("Enter valid email.");
-      $("#email").focus();
-      return false;
-    }
-
-    // validate subject
-    if (pass1 == "") {
-      alert("Enter password");
-      $("#password_1").focus();
-      return false;
-    } else if (pass1.length < 6) {
-      alert("Password must be atleast 6 character.");
-      $("#password_1").focus();
-      return false;
-    }
-
-    if (pass1 != pass2) {
-      alert("Password does not matched.");
-      $("#password_2").focus();
-      return false;
-    }
-
-    return true;
-  }
-
-  function isValidEmail(email) {
-    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    return regex.test(email);
-  }
-
-
-</script>
 </html>
 

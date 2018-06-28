@@ -48,7 +48,6 @@ session_start();
 	}
 	
 	// delete task
-	
 	if (isset($_GET['del_task'])) {
 		if  ($userId == $taskUserId) {
 	    $id = $_GET['del_task'];
@@ -87,7 +86,6 @@ session_start();
 	}
 	
 	// edit task POST Request
-
 	if (isset($_POST['update'])) {
 		$id = $_POST['id'];
 		$task = $_POST['task'];
@@ -97,7 +95,6 @@ session_start();
 		header('location: index.php');
 	}
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -148,11 +145,6 @@ session_start();
 	</form>
 	<table>
 	<tbody>
-		<?php 
-	
-	
-		?>
-		
 		<?php foreach($tasks as $tasksRows): ?>
 			
 			<tr>
@@ -165,9 +157,7 @@ session_start();
 					<a href="index.php?del_task=<?php echo $tasksRows[0] ?>"><button type="text" name="delete" id="delete_btn" class="button"><i class="fa fa-remove"></i></button></a>
 				</td>
 			</tr>
-			<?php endforeach; ?>
-				
-		
+			<?php endforeach; ?>	
 	</tbody>
 </table>
 </body>
