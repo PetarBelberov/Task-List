@@ -13,7 +13,8 @@ define('DB_SERVER_PASSWORD', '');
 define('DB_DATABASE', 'todo');
 
 // must end with a slash
-define('SITE_URL', 'http://localhost/ToDo-List/');
+define('SITE_URL', url());
+
 
 $dboptions = array(
     PDO::ATTR_PERSISTENT => FALSE,
@@ -28,4 +29,14 @@ try {
   die;
 }
 
+
+function url(){
+  if(isset($_SERVER['HTTPS'])){
+      $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+  }
+  else{
+      $protocol = 'http';
+  }
+  return $protocol . "://" . $_SERVER['HTTP_HOST'];
+}
 ?>

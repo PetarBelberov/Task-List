@@ -6,9 +6,11 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div class="header">
-  	<h2>Login</h2>
-  </div>
+	<header>
+		<div class="header">
+			<h2>Login</h2>
+		</div>
+	</header>
 	 
   <form method="post" action="login.php">
   	<?php include('errors.php'); ?>

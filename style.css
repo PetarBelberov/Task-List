@@ -18,7 +18,7 @@ body {
 	border-radius: 10px 10px 10px 10px;
 	padding: 20px;
 }
-form, .content {
+form.input_form, .content {
   width: 30%;
   margin: 0px auto;
   padding: 20px;
@@ -102,8 +102,6 @@ form, .content {
   margin-bottom: 20px;
 }
 
-//
-
 .heading{
 	width: 50%;
 	margin: 30px auto;
@@ -113,7 +111,7 @@ form, .content {
 	border: 2px solid #6B8E23;
 	border-radius: 20px;
 }
-form {
+form.input_form {
 	width: 50%; 
 	margin: 30px auto; 
 	border-radius: 5px; 
@@ -121,11 +119,11 @@ form {
 	background: #FFF8DC;
 	border: 1px solid #6B8E23;
 }
-form p {
+form.input_form p {
 	color: red;
 	margin: 0px;
 }
-.task_input {
+.task_input, .list_input {
 	width: 60%;
 	height: 15px; 
 	padding: 10px;
@@ -195,4 +193,34 @@ tr:hover {
 
 .delete{
 	text-align: center;
+}
+
+/* nav */
+.nav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.nav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* nav */
+.nav .logout {
+  float: right;
 }

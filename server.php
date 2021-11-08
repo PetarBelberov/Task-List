@@ -56,7 +56,7 @@ if (isset($_POST["reg_user"])) {
                 </head>
                 <body>';
                 $message .= '<h1>Hi ' . $name . '!</h1>';
-                $message .= '<p><a href="'.SITE_URL.'activate.php?id=' . $hash . '">CLICK TO ACTIVATE YOUR ACCOUNT</a>';
+                $message .= '<p><a href="' . SITE_URL . '/activate.php?id=' . $hash . '">CLICK TO ACTIVATE YOUR ACCOUNT</a>';
                 $message .= "</body></html>";
                 
                 // php mailer code starts
@@ -66,13 +66,13 @@ if (isset($_POST["reg_user"])) {
                 $mail->SMTPDebug = 0;                     // enables SMTP debug information (for testing)
                 $mail->SMTPAuth = true;                  // enable SMTP authentication
                 $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-                $mail->Host = "[your email hosting service]";      // sets GMX as the SMTP server for example: mail.gmx.com
+                $mail->Host = "mail.gmx.com";      // sets GMX as the SMTP server for example: mail.gmx.com
                 $mail->Port = 465;                   // set the SMTP port for the GMX server
                 
-                $mail->Username = '[your email]';
-                $mail->Password = '[your email password]';
-                
-                $mail->SetFrom('[your email]', '[name]');
+                $mail->Username = '...';
+                $mail->Password = '...';
+				
+                $mail->SetFrom('...', '...');
                 $mail->AddAddress($email);
                 
                 $mail->Subject = trim("Email Verifcation - ToDo List");

@@ -1,11 +1,4 @@
 <?php
-/*
- * @author Shahrukh Khan
- * @website http://www.thesoftwareguy.in
- * @facebbok https://www.facebook.com/Thesoftwareguy7
- * @twitter https://twitter.com/thesoftwareguy7
- * @googleplus https://plus.google.com/+thesoftwareguyIn
- */
 require_once './config.php';
 include ('server.php');
 if (isset($_GET["id"])) {
@@ -50,7 +43,7 @@ if (isset($_GET["id"])) {
   <?php include ('server.php'); ?>
     <p><?php echo $msg; ?></p>
     <?php if ($msgType == "success") { ?>
-        <a href="http://localhost/ToDo-List/index.php">You can login to your account</a>
+        <a href="<?php echo SITE_URL . '/login.php '?>">You can login to your account</a>
    <?php } ?> 
   </div>
 <?php } ?>
