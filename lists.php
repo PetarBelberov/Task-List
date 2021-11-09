@@ -46,22 +46,6 @@ require_once './config.php';
 	foreach	($tasks as $t) {
 		$taskUserId = $t[2];
 	}
-    
-    // add task
-	if (isset($_POST['submit-task'])) {
-				
-		if (empty($_POST['task'])) {	
-			$errors = "You must fill in the task";
-		}
-		else {
-			$task = $_POST['task'];
-			$description = $_POST['description'];
-			$sql = "INSERT INTO tasks (task, list_id, description, status) VALUES ('$task', '$listId',  '$description', 'undone')";
-			
-			mysqli_query($db, $sql);
-			header('location: ' . $_SERVER['REQUEST_URI']);
-		}
-	}
 		
 	// Task status
 	function checked($tasksRows)
@@ -73,17 +57,16 @@ require_once './config.php';
 		if (!empty($tasks_done)) {
 			$checked = 'checked';
 		}
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-            $checkboxName = $_POST['checkbox-' . $tasksRows];
+		$checkboxName = $_POST['checkbox-' . $tasksRows];
 
-            if (isset($checkboxName)) {
-                foreach ($checkboxName as $aa) {
-                    $checked = 'checked';
-                    $status = 'done';
-                    mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
-                }
-            } else {
+		if (isset($_POST['checkbox-' . $tasksRows])) {
+
+			foreach ($checkboxName as $aa) {
+				$checked = 'checked';
+				$status = 'done';
+				mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
+			}
+			if (!isset($checkboxName)) {
                 $checked = '';
                 $status = 'undone';
                 mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
@@ -91,7 +74,6 @@ require_once './config.php';
         }
 		return $checked;
 	}
-
 ?>
 
 <!DOCTYPE html>
@@ -128,28 +110,10 @@ require_once './config.php';
   	<?php endif ?>
 </div>
 
-	<form method="post" action="" class="input_form">
-		<?php if (isset($errors)) { ?>
-			<p><?php echo $errors; ?></p>
-		<?php } ?>
-	
-		<input type="hidden" name="id" value="">
-		
-		<?php if (isset($update)) : ?>
-			<input type="hidden" name="id" value="<?php echo $id; ?>">
-			<input type="text" name="task" class="task_input" placeholder="Name" value="<?php echo $task; ?>">
-			<input type="text" name="description" class="description_input" placeholder="Description" value="<?php echo $description; ?>">
-			<button type="submit" name="update-task" id="update_task_btn" class="button"><i class="fa fa-edit"></i></button>
-		<?php else: ?>
-			<input type="text" name="task" class="task_input" placeholder="Name" >
-			<input type="text" name="description" class="description_input" placeholder="Description">
-			<button type="submit" name="submit-task" id="add_btn" class="button"><i class="fa fa-plus"></i></button>
-		<?php endif ?>
-	</form>
-
+	<?php include_once './create.php'; ?>
 	<table>
 		<tbody>		
-			<form method="POST" action="">
+			<form method="POST" action="" name="all-lists">
 				<?php foreach($tasks as $tasksRows): ?>
 					<tr>
 						<td> <?php echo $tasksRows[0]; ?> </td>
