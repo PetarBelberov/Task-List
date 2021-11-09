@@ -61,54 +61,6 @@ require_once './config.php';
 			header('location: ' . $_SERVER['REQUEST_URI']);
 		}
 	}
-	
-	// delete task
-	if (isset($_GET['del_task'])) {
-		if  ($userId == $taskUserId) {
-			$id = $_GET['del_task'];
-			
-			mysqli_query($db, "DELETE FROM tasks WHERE id=$id");
-			header('location: index.php');
-		}
-		else {
-			function exception_handler($exception) {
-				echo "Uncaught exception: " , $exception->getMessage(), "\n";
-			}
-			set_exception_handler('exception_handler');
-
-			throw new Exception('Uncaught Exception');
-		}
-	}
-	 
-	// // edit task GET Request
-	// if (isset($_GET['edit_task'])) {
-	// 	if  ($taskUserId == $listId) {
-    //         $id = $_GET['edit_task'];
-    //         $update = true;
-    //         $record = mysqli_query($db, "SELECT task FROM tasks WHERE id=$id");
-
-    //         $task = mysqli_fetch_array($record);
-    //         $task = $task['task'];
-	// 	}
-	// 	else {
-	// 		function exception_handler($exception) {
-	// 			echo "Uncaught exception: " , $exception->getMessage(), "\n";
-	// 		}
-	// 		set_exception_handler('exception_handler');
-
-	// 		throw new Exception('Uncaught Exception');
-	// 	}
-	// }
-	
-	// // edit task POST Request
-	// if (isset($_POST['update-task'])) {
-	// 	$id = $_POST['id'];
-	// 	$task = $_POST['task'];
-		
-	// 	mysqli_query($db, "UPDATE tasks SET task = '$task' WHERE id = $id");
-		
-	// 	header('location: ' . $_SERVER['REQUEST_URI']);
-	// }
 		
 	// Task status
 	function checked($tasksRows)
@@ -208,8 +160,9 @@ require_once './config.php';
 							</a>
 						</td>
 						<td class="delete"> 
-							<a href="<?php echo $listId . '?del_task=' . $tasksRows[0] ?>">
-								<button type="text" name="<?php echo 'delete-' . $tasksRows[0] ?>" id="delete_btn" class="button"><i class="fa fa-remove"></i></button>
+							<a href="<?php echo '../delete.php/' . $listId . '?del_task=' . $tasksRows[0] ?>">
+								<!-- <button type="text" name="<?php echo 'delete-' . $tasksRows[0] ?>" id="delete_btn" class="button"><i class="fa fa-remove"></i></button> -->
+								<i class="fa fa-remove button"></i><input type="submit" value="" name="<?php echo 'delete-' . $tasksRows[0] ?>" id="delete_btn" />
 							</a>
 						</td>
 					</tr>
