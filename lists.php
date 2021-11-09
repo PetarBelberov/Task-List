@@ -63,12 +63,12 @@ require_once './config.php';
 	}
 	
 	// delete task
-	if (isset($_GET['del-task-' . $tasksRows])) {
+	if (isset($_GET['del_task'])) {
 		if  ($userId == $taskUserId) {
-	    $id = $_GET['del_task'];
-	    
-	    mysqli_query($db, "DELETE FROM tasks WHERE id=$id");
-	    header('location: index.php');
+			$id = $_GET['del_task'];
+			
+			mysqli_query($db, "DELETE FROM tasks WHERE id=$id");
+			header('location: index.php');
 		}
 		else {
 			function exception_handler($exception) {
@@ -80,38 +80,35 @@ require_once './config.php';
 		}
 	}
 	 
-	// edit task GET Request
-	if (isset($_GET['edit-task-' . $tasksRows])) {
-		if  ($taskUserId == $listId) {
-            $id = $_GET['edit-task-' . $tasksRows];
-            $update = true;
-            $record = mysqli_query($db, "SELECT task FROM tasks WHERE id=$id");
+	// // edit task GET Request
+	// if (isset($_GET['edit_task'])) {
+	// 	if  ($taskUserId == $listId) {
+    //         $id = $_GET['edit_task'];
+    //         $update = true;
+    //         $record = mysqli_query($db, "SELECT task FROM tasks WHERE id=$id");
 
-            $task = mysqli_fetch_array($record);
-            $task = $task['task'];
-		}
-		else {
-			function exception_handler($exception) {
-				echo "Uncaught exception: " , $exception->getMessage(), "\n";
-			}
-			set_exception_handler('exception_handler');
+    //         $task = mysqli_fetch_array($record);
+    //         $task = $task['task'];
+	// 	}
+	// 	else {
+	// 		function exception_handler($exception) {
+	// 			echo "Uncaught exception: " , $exception->getMessage(), "\n";
+	// 		}
+	// 		set_exception_handler('exception_handler');
 
-			throw new Exception('Uncaught Exception');
-		}
-	}
+	// 		throw new Exception('Uncaught Exception');
+	// 	}
+	// }
 	
-	// edit task POST Request
-	if (isset($_POST['update-task'])) {
-		$id = $_POST['id'];
-		$task = $_POST['task'];
+	// // edit task POST Request
+	// if (isset($_POST['update-task'])) {
+	// 	$id = $_POST['id'];
+	// 	$task = $_POST['task'];
 		
-		mysqli_query($db, "UPDATE tasks SET task = '$task' WHERE id = $id");
+	// 	mysqli_query($db, "UPDATE tasks SET task = '$task' WHERE id = $id");
 		
-		// header('location: index.php');
-		header('location: ' . $_SERVER['REQUEST_URI']);
-		// header('Location: '.$_SERVER['REQUEST_URI']);
-
-	}
+	// 	header('location: ' . $_SERVER['REQUEST_URI']);
+	// }
 		
 	// Task status
 	function checked($tasksRows)
@@ -124,7 +121,6 @@ require_once './config.php';
 			$checked = 'checked';
 		}
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			// if(isset($_POST['submit-checkbox'])) {
             
             $checkboxName = $_POST['checkbox-' . $tasksRows];
 
@@ -143,16 +139,6 @@ require_once './config.php';
 		return $checked;
 	}
 
-	function checked_2($taskId) {
-		$db = mysqli_connect("localhost", "root", "", "todo");
-		$checked = false;
-		$tasks_done = mysqli_fetch_all(mysqli_query($db, "SELECT id FROM tasks WHERE status='done' AND id=$taskId"));
-		
-		if (!empty($tasks_done)) {
-			$checked = true;
-		}
-		return $checked;
-	}
 ?>
 
 <!DOCTYPE html>
@@ -160,8 +146,8 @@ require_once './config.php';
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL . '/style.css' ?>">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  	<script src="../assets/js/checkbox.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+  	<!-- <script src="../assets/js/checkbox.js"></script> -->
 	<title>ToDo List Application PHP and MySQL</title>
 </head>
 <body>
@@ -205,6 +191,7 @@ require_once './config.php';
 			<button type="submit" name="submit-task" id="add_btn" class="button"><i class="fa fa-plus"></i></button>
 		<?php endif ?>
 	</form>
+
 	<table>
 		<tbody>		
 			<form method="POST" action="">
@@ -214,13 +201,16 @@ require_once './config.php';
 						<td class="task"> <?php echo $tasksRows[1]; ?> </td>
 						<td>
 							<input type="checkbox" class="checkbox" name="<?php echo 'checkbox-' . $tasksRows[0] . '[]' ?>" value="<?php echo $tasksRows[3] ?>" <?php echo checked($tasksRows[0])  ?> onchange="this.form.submit()">
-							<!-- <button type="submit" name="submit-checkbox" class="submit-checkbox"><i class="fa fa-edit"></i></button> -->
 						</td>
 						<td class="edit"> 
-							<a href="<?php echo $listId . '?edit_task=' . $tasksRows[0] ?>"><button type="text" name="<?php echo 'edit-task-' . $tasksRows[0] ?>" id="edit_btn" class="button"><i class="fa fa-edit"></i></button></a> 
+							<a href="<?php echo '../edit.php/' . $listId . '?edit_task=' . $tasksRows[0] ?>">
+								<i class="fa fa-edit button"></i><input type="submit" value="" name="<?php echo 'edit-' . $tasksRows[0] ?>" id="edit_btn" />
+							</a>
 						</td>
 						<td class="delete"> 
-							<a href="<?php echo $listId . '?del_task=' . $tasksRows[0] ?>"><button type="text" name="<?php echo 'del-task-' . $tasksRows[0] ?>" id="delete_btn" class="button"><i class="fa fa-remove"></i></button></a>
+							<a href="<?php echo $listId . '?del_task=' . $tasksRows[0] ?>">
+								<button type="text" name="<?php echo 'delete-' . $tasksRows[0] ?>" id="delete_btn" class="button"><i class="fa fa-remove"></i></button>
+							</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>
