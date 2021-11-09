@@ -49,13 +49,14 @@ require_once './config.php';
     
     // add task
 	if (isset($_POST['submit-task'])) {
-					
-		if (empty($_POST['task'])) {
+				
+		if (empty($_POST['task'])) {	
 			$errors = "You must fill in the task";
 		}
 		else {
 			$task = $_POST['task'];
-			$sql = "INSERT INTO tasks (task, list_id, status) VALUES ('$task', '$listId', 'undone')";
+			$description = $_POST['description'];
+			$sql = "INSERT INTO tasks (task, list_id, description, status) VALUES ('$task', '$listId',  '$description', 'undone')";
 			
 			mysqli_query($db, $sql);
 			header('location: ' . $_SERVER['REQUEST_URI']);
@@ -128,18 +129,20 @@ require_once './config.php';
 </div>
 
 	<form method="post" action="" class="input_form">
-	<?php if (isset($errors)) { ?>
-		<p><?php echo $errors; ?></p>
-	<?php } ?>
+		<?php if (isset($errors)) { ?>
+			<p><?php echo $errors; ?></p>
+		<?php } ?>
 	
 		<input type="hidden" name="id" value="">
 		
 		<?php if (isset($update)) : ?>
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
-			<input type="text" name="task" class="task_input" value="<?php echo $task; ?>">
+			<input type="text" name="task" class="task_input" placeholder="Name" value="<?php echo $task; ?>">
+			<input type="text" name="description" class="description_input" placeholder="Description" value="<?php echo $description; ?>">
 			<button type="submit" name="update-task" id="update_task_btn" class="button"><i class="fa fa-edit"></i></button>
 		<?php else: ?>
-			<input type="text" name="task" class="task_input">
+			<input type="text" name="task" class="task_input" placeholder="Name" >
+			<input type="text" name="description" class="description_input" placeholder="Description">
 			<button type="submit" name="submit-task" id="add_btn" class="button"><i class="fa fa-plus"></i></button>
 		<?php endif ?>
 	</form>
@@ -151,8 +154,9 @@ require_once './config.php';
 					<tr>
 						<td> <?php echo $tasksRows[0]; ?> </td>
 						<td class="task"> <?php echo $tasksRows[1]; ?> </td>
+						<td> <?php echo $tasksRows[3]; ?> </td>
 						<td>
-							<input type="checkbox" class="checkbox" name="<?php echo 'checkbox-' . $tasksRows[0] . '[]' ?>" value="<?php echo $tasksRows[3] ?>" <?php echo checked($tasksRows[0])  ?> onchange="this.form.submit()">
+							<input type="checkbox" class="checkbox" name="<?php echo 'checkbox-' . $tasksRows[0] . '[]' ?>" value="<?php echo $tasksRows[4] ?>" <?php echo checked($tasksRows[0])  ?> onchange="this.form.submit()">
 						</td>
 						<td class="edit"> 
 							<a href="<?php echo '../edit.php/' . $listId . '?edit_task=' . $tasksRows[0] ?>">
@@ -161,7 +165,6 @@ require_once './config.php';
 						</td>
 						<td class="delete"> 
 							<a href="<?php echo '../delete.php/' . $listId . '?del_task=' . $tasksRows[0] ?>">
-								<!-- <button type="text" name="<?php echo 'delete-' . $tasksRows[0] ?>" id="delete_btn" class="button"><i class="fa fa-remove"></i></button> -->
 								<i class="fa fa-remove button"></i><input type="submit" value="" name="<?php echo 'delete-' . $tasksRows[0] ?>" id="delete_btn" />
 							</a>
 						</td>

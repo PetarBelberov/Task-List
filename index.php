@@ -26,8 +26,6 @@ $user = mysqli_query($db, "SELECT id FROM users WHERE username='$username'");
 $userColumns = mysqli_fetch_row($user);
 $userId = $userColumns[0];
 
-// $tasks = mysqli_fetch_all(mysqli_query($db, "SELECT * FROM tasks WHERE list_id='$listId'"));
-
 $lists = mysqli_query($db, "SELECT id, name FROM lists WHERE user_id='$userId'");
 $lists = mysqli_fetch_all($lists);
 

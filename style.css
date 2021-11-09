@@ -112,6 +112,7 @@ form.input_form, .content {
 	border-radius: 20px;
 }
 form.input_form {
+  display: flex;
 	width: 50%; 
 	margin: 30px auto; 
 	border-radius: 5px; 
@@ -123,8 +124,8 @@ form.input_form p {
 	color: red;
 	margin: 0px;
 }
-.task_input, .list_input {
-	width: 60%;
+.task_input, .list_input, .description_input {
+	width: 50%;
 	height: 15px; 
 	padding: 10px;
 	border: 2px solid #6B8E23;
