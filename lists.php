@@ -116,22 +116,40 @@ require_once './config.php';
 	// Task status
 	function checked($tasksRows)
 	{
+		$db = mysqli_connect("localhost", "root", "", "todo");
+		$checked = '';
+		$tasks_done = mysqli_fetch_all(mysqli_query($db, "SELECT id FROM tasks WHERE status='done' AND id=$tasksRows"));
 		
-		$db = mysqli_connect("localhost", "root", "", "todo");	
-		$checkboxName = $_POST['checkbox-' . $tasksRows];
+		if (!empty($tasks_done)) {
+			$checked = 'checked';
+		}
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			// if(isset($_POST['submit-checkbox'])) {
+            
+            $checkboxName = $_POST['checkbox-' . $tasksRows];
 
-        if (isset($checkboxName)) {
-            foreach ($checkboxName as $aa) {
-				var_dump($aa);
-				$checked = 'checked';
-				$status = 'done';
-				mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
-			}
+            if (isset($checkboxName)) {
+                foreach ($checkboxName as $aa) {
+                    $checked = 'checked';
+                    $status = 'done';
+                    mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
+                }
+            } else {
+                $checked = '';
+                $status = 'undone';
+                mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
+            }
         }
-		else {
-			$checked = '';
-			$status = 'undone';
-			mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
+		return $checked;
+	}
+
+	function checked_2($taskId) {
+		$db = mysqli_connect("localhost", "root", "", "todo");
+		$checked = false;
+		$tasks_done = mysqli_fetch_all(mysqli_query($db, "SELECT id FROM tasks WHERE status='done' AND id=$taskId"));
+		
+		if (!empty($tasks_done)) {
+			$checked = true;
 		}
 		return $checked;
 	}
@@ -142,7 +160,8 @@ require_once './config.php';
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL . '/style.css' ?>">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  	<script src="../assets/js/checkbox.js"></script>
 	<title>ToDo List Application PHP and MySQL</title>
 </head>
 <body>
@@ -194,7 +213,8 @@ require_once './config.php';
 						<td> <?php echo $tasksRows[0]; ?> </td>
 						<td class="task"> <?php echo $tasksRows[1]; ?> </td>
 						<td>
-							<input type="checkbox" class="checkbox" name="<?php echo 'checkbox-' . $tasksRows[0] . '[]' ?>" value="<?php echo $tasksRows[3] ?>" <?php echo checked($tasksRows[0]) ?> onchange="this.form.submit()">
+							<input type="checkbox" class="checkbox" name="<?php echo 'checkbox-' . $tasksRows[0] . '[]' ?>" value="<?php echo $tasksRows[3] ?>" <?php echo checked($tasksRows[0])  ?> onchange="this.form.submit()">
+							<!-- <button type="submit" name="submit-checkbox" class="submit-checkbox"><i class="fa fa-edit"></i></button> -->
 						</td>
 						<td class="edit"> 
 							<a href="<?php echo $listId . '?edit_task=' . $tasksRows[0] ?>"><button type="text" name="<?php echo 'edit-task-' . $tasksRows[0] ?>" id="edit_btn" class="button"><i class="fa fa-edit"></i></button></a> 
