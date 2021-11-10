@@ -37,7 +37,7 @@ if (isset($_POST["reg_user"])) {
         elseif (count($errors) == 0) {
             $sql = "INSERT INTO `users` (`username`, `password`, `email`, `hash`) VALUES " . "( :name, :pass, :email, :hash)";
             array_push($verificationMessages, "Check your email to activate your account");
-            
+
             $stmt = $DB->prepare($sql);
             $stmt->bindValue(":name", $name);
             $stmt->bindValue(":pass", password_hash($pass, PASSWORD_BCRYPT));
@@ -59,46 +59,43 @@ if (isset($_POST["reg_user"])) {
                 $message .= '<p><a href="' . SITE_URL . '/activate.php?id=' . $hash . '">CLICK TO ACTIVATE YOUR ACCOUNT</a>';
                 $message .= "</body></html>";
                 
-                // php mailer code starts
-                $mail = new PHPMailer(true);
-                $mail->IsSMTP(); // telling the class to use SMTP
                 
-                $mail->SMTPDebug = 0;                     // enables SMTP debug information (for testing)
-                $mail->SMTPAuth = true;                  // enable SMTP authentication
-                $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-                $mail->Host = "mail.gmx.com";      // sets GMX as the SMTP server for example: mail.gmx.com
-                $mail->Port = 465;                   // set the SMTP port for the GMX server
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->Host = 'smtp.mailtrap.io';
+                $mail->SMTPAuth = true;
+                $mail->Port = 2525;
+                $mail->Username = 'edb73ed32e8f83';
+                $mail->Password = '671341dd0f0a45';// set the SMTP port for the GMX server
                 
-                $mail->Username = '...';
-                $mail->Password = '...';
-				
-                $mail->SetFrom('...', '...');
+
+                $mail->SetFrom('mailtrap', 'Task List Verification');
                 $mail->AddAddress($email);
                 
-                $mail->Subject = trim("Email Verifcation - ToDo List");
+                $mail->Subject = trim("Email Verification - ToDo List");
                 $mail->MsgHTML($message);
                 
                 try {
                     $mail->send();
                     $msg = "An email has been sent for verfication.";
                     $msgType = "success";
-                    
+
                 } catch (Exception $ex) {
                     $msg = $ex->getMessage();
                     $msgType = "warning";
                 }
-                
                 
             } else {
                 $msg = "Failed to create User";
                 $msgType = "warning";
                 array_push($verificationMessages, "Failed to create User");
             }
+            header('location: ' . $_SERVER['REQUEST_URI']);
         }
     } catch (Exception $ex) {
         echo $ex->getMessage();
     }
-    
+    // 
 }
 
 
@@ -137,7 +134,7 @@ if (isset($_POST['login_user'])) {
         if (mysqli_num_rows($results) == 1 && $verifyPass) {
             $_SESSION['username'] = $username;
             $_SESSION['success'] = "You are now logged in";
-            header('location: index.php');
+            header('location: ' . $_SERVER['REQUEST_URI']);
         }
         else {
             array_push($errors, "Wrong username/password combination");
