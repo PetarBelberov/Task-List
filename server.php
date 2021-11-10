@@ -101,7 +101,6 @@ if (isset($_POST["reg_user"])) {
     
 }
 
-//
 
 // LOGIN USER
 include('errors.php');

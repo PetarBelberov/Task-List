@@ -63,58 +63,5 @@ require_once './config.php';
 		
 		header('location: ' . $_SERVER['REQUEST_URI']);
 	}
-
+	include_once 'templates/edit.php';
     ?>
-    <!DOCTYPE html>
-		<html>
-		<head>
-			<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL . '/style.css' ?>">
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-			
-			<title>ToDo List Application PHP and MySQL</title>
-		</head>
-		<body>
-			<header>
-				<div class="nav">
-					<a class="active" href="<?php echo SITE_URL ?>">Home</a>
-					<a href="TODO">Create List</a>
-					<a class="logout" href="<?php echo SITE_URL . '/logout.php' ?>">Logout</a>
-				</div>
-			</header>
-		<div class="header">
-			<h2><?php echo $listName ?></h2>
-		</div>
-		<div class="content">
-			<!-- notification message -->
-			<?php if (isset($_SESSION['success'])) : ?> 
-			<div class="error success" >
-				<h3>
-				<?php 
-					echo $_SESSION['success']; 
-					unset($_SESSION['success']);
-				?>
-				</h3>
-			</div>
-			<?php endif ?>
-		</div>
-
-			<form method="post" action="" class="input_form">
-				<?php if (isset($errors)) { ?>
-					<p><?php echo $errors; ?></p>
-				<?php } ?>
-			
-				<input type="hidden" name="id" value="">
-				
-				<?php if (isset($update)) : ?>
-					<input type="hidden" name="id" value="<?php echo $id; ?>">
-					<input type="text" name="task" class="task_input" value="<?php echo $task; ?>">
-					<input type="text" name="description" class="description_input" value="<?php echo $description; ?>">
-					<button type="submit" name="update-task" id="update_task_btn" class="button"><i class="fa fa-edit"></i></button>
-				<?php else: ?>
-					<input type="text" name="task" class="task_input">
-					<input type="text" name="description" class="description_input">
-					<button type="submit" name="submit-task" id="add_btn" class="button"><i class="fa fa-plus"></i></button>
-				<?php endif ?>
-			</form>
-		</body>
-		</html>

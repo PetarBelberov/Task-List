@@ -44,9 +44,9 @@ require_once './config.php';
 
 	$taskUserId = null;
 	foreach	($tasks as $t) {
-		$taskUserId = $t[2];
+		$taskUserId = $t[2];	
 	}
-    
+	
     // add task
 	if (isset($_POST['submit-task'])) {
 				
@@ -59,29 +59,12 @@ require_once './config.php';
 			$sql = "INSERT INTO tasks (task, list_id, description, status) VALUES ('$task', '$listId',  '$description', 'undone')";
 			
 			mysqli_query($db, $sql);
-			header('location: ' . $_SERVER['REQUEST_URI']);
+			header('location: ' . SITE_URL . '/lists.php/' . $listId);
 		}
 	}
 
-    ?>
-
-	<form method="post" action="" class="input_form">
-		<?php if (isset($errors)) { ?>
-			<p><?php echo $errors; ?></p>
-		<?php } ?>
+include_once 'templates/create.php';
+?>
 	
-		<input type="hidden" name="id" value="">
-		
-		<?php if (isset($update)) : ?>
-			<input type="hidden" name="id" value="<?php echo $id; ?>">
-			<input type="text" name="task" class="task_input" placeholder="Name" value="<?php echo $task; ?>">
-			<input type="text" name="description" class="description_input" placeholder="Description" value="<?php echo $description; ?>">
-			<button type="submit" name="update-task" id="update_task_btn" class="button"><i class="fa fa-edit"></i></button>
-		<?php else: ?>
-			<input type="text" name="task" class="task_input" placeholder="Name" >
-			<input type="text" name="description" class="description_input" placeholder="Description">
-			<button type="submit" name="submit-task" id="add_btn" class="button"><i class="fa fa-plus"></i></button>
-		<?php endif ?>
-	</form>
 
 

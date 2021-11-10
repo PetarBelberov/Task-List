@@ -45,54 +45,6 @@ if (isset($_POST['submit-list'])) {
     }
 }
 
+include_once 'templates/index.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Lists</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-  <!-- <script src="assets/js/checkbox.js"></script> -->
 
-</head>
-    <body>
-        <header>
-            <div class="nav">
-                <a class="active" href="<?php echo SITE_URL ?>">Home</a>
-                <a href="TODO">Create List</a>
-                <a class="logout" href="<?php echo SITE_URL . '/logout.php' ?>">Logout</a>
-            </div>
-        </header>
-        <div class="header">
-			<h2><?php echo $username . "'s To-Do List"?></h2>
-		</div>
-        <div class="container">
-            <form method="post" action="" class="input_form">
-                <?php if (isset($errors)) { ?>
-                    <p><?php echo $errors; ?></p>
-                <?php } ?>
-        
-                <input type="hidden" name="id" value="">
-                
-                <?php if (isset($update)) : ?>
-                    <input type="hidden" name="id" value="<?php echo $id; ?>">
-                    <input type="text" name="list" class="list_input" value="<?php echo $list; ?>">
-                    <button type="submit" name="update-list" id="update_list_btn" class="button"><i class="fa fa-edit"></i></button>
-                <?php else: ?>
-                    <input type="text" name="list" class="list_input">
-                    <button type="submit" name="submit-list" id="add_btn" class="button"><i class="fa fa-plus"></i></button>
-                <?php endif ?>
-	        </form>
-            <table>
-                <tbody>
-                    <?php foreach($lists as $listId): ?>
-                        <tr>
-                            <td class="list"><a href="<?php echo '/lists.php/' . $listId[0] ?>"> <?php echo $listId[1]; ?> </a></td>
-                        </tr>
-                    <?php endforeach; ?>	
-                </tbody>
-            </table>
-        </div><!-- .container -->
-    </body>
-</html>

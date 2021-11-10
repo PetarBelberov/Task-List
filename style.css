@@ -231,3 +231,23 @@ tr:hover {
   width: 35%;
   margin: 0 auto;
 }
+
+.create-task {
+  border: 3px solid #FCD86F;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  text-decoration: none;
+  margin: 0 auto;
+  position: relative;
+  width: fit-content;
+  font-size: 16px;
+  margin-top: 2rem;
+}
+
+.create-task a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #545353;
+}

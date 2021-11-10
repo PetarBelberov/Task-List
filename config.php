@@ -39,4 +39,5 @@ function url(){
   }
   return $protocol . "://" . $_SERVER['HTTP_HOST'];
 }
+
 ?>

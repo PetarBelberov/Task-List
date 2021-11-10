@@ -46,8 +46,8 @@ require_once './config.php';
 	foreach	($tasks as $t) {
 		$taskUserId = $t[2];
 	}
-		
-	// Task status
+			
+    // Task status
 	function checked($tasksRows)
 	{
 		$db = mysqli_connect("localhost", "root", "", "todo");
@@ -57,86 +57,24 @@ require_once './config.php';
 		if (!empty($tasks_done)) {
 			$checked = 'checked';
 		}
-		$checkboxName = $_POST['checkbox-' . $tasksRows];
-
-		if (isset($_POST['checkbox-' . $tasksRows])) {
-
-			foreach ($checkboxName as $aa) {
-				$checked = 'checked';
-				$status = 'done';
-				mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
+	
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			
+			$checkboxName = $_POST['checkbox-' . $tasksRows];
+			if (isset($checkboxName)) {
+				foreach ($checkboxName as $aa) {
+					$checked = 'checked';
+					$status = 'done';
+					mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
+				}
+			} else {
+					$checked = '';
+					$status = 'undone';
+					mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
 			}
-			if (!isset($checkboxName)) {
-                $checked = '';
-                $status = 'undone';
-                mysqli_query($db, "UPDATE `tasks` SET `status`='$status' WHERE id='$tasksRows'");
-            }
-        }
+		}	
 		return $checked;
 	}
+	
+	include_once 'templates/lists.php';
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL . '/style.css' ?>">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-  	<!-- <script src="../assets/js/checkbox.js"></script> -->
-	<title>ToDo List Application PHP and MySQL</title>
-</head>
-<body>
-	<header>
-		<div class="nav">
-			<a class="active" href="<?php echo SITE_URL ?>">Home</a>
-			<a href="TODO">Create List</a>
-			<a class="logout" href="<?php echo SITE_URL . '/logout.php' ?>">Logout</a>
-		</div>
-	</header>
-<div class="header">
-	<h2><?php echo $listName ?></h2>
-</div>
-<div class="content">
-  	<!-- notification message -->
-  	<?php if (isset($_SESSION['success'])) : ?> 
-      <div class="error success" >
-      	<h3>
-          <?php 
-          	echo $_SESSION['success']; 
-          	unset($_SESSION['success']);
-          ?>
-      	</h3>
-      </div>
-  	<?php endif ?>
-</div>
-
-	<?php include_once './create.php'; ?>
-	<table>
-		<tbody>		
-			<form method="POST" action="" name="all-lists">
-				<?php foreach($tasks as $tasksRows): ?>
-					<tr>
-						<td> <?php echo $tasksRows[0]; ?> </td>
-						<td class="task"> <?php echo $tasksRows[1]; ?> </td>
-						<td> <?php echo $tasksRows[3]; ?> </td>
-						<td>
-							<input type="checkbox" class="checkbox" name="<?php echo 'checkbox-' . $tasksRows[0] . '[]' ?>" value="<?php echo $tasksRows[4] ?>" <?php echo checked($tasksRows[0])  ?> onchange="this.form.submit()">
-						</td>
-						<td class="edit"> 
-							<a href="<?php echo '../edit.php/' . $listId . '?edit_task=' . $tasksRows[0] ?>">
-								<i class="fa fa-edit button"></i><input type="submit" value="" name="<?php echo 'edit-' . $tasksRows[0] ?>" id="edit_btn" />
-							</a>
-						</td>
-						<td class="delete"> 
-							<a href="<?php echo '../delete.php/' . $listId . '?del_task=' . $tasksRows[0] ?>">
-								<i class="fa fa-remove button"></i><input type="submit" value="" name="<?php echo 'delete-' . $tasksRows[0] ?>" id="delete_btn" />
-							</a>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-			</form>
-		</tbody>
-	</table>
-</body>
-</html>
-
