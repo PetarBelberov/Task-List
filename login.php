@@ -12,8 +12,7 @@
 		</div>
 	</header>
 	 
-  <form method="post" action="login.php">
-  	<?php include('errors.php'); ?>
+  <form method="post" action="login.php" class="access-form">
   	<div class="input-group">
   		<label>Username</label>
   		<input type="text" name="username" >

@@ -11,8 +11,7 @@
   	<h2>Register</h2>
   </div>
 	
-  <form method="post" action="register.php">
-	<?php include('errors.php'); ?>
+  <form method="post" action="register.php" class="access-form">
 	<?php include('verificationMessage.php'); ?>
   	<div class="input-group">
   	  <label>Username</label>

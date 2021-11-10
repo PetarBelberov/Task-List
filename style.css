@@ -225,3 +225,9 @@ tr:hover {
 .nav .logout {
   float: right;
 }
+
+/* access form */
+.access-form {
+  width: 35%;
+  margin: 0 auto;
+}
