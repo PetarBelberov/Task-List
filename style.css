@@ -146,13 +146,9 @@ form.input_form p {
 	margin-left: 10px;
 }
 
-
-
 #edit_btn, #delete_btn {
     background: transparent;
     border: none;
-    height: 31px;
-    width: 34px;
 }
 
 #edit_btn:hover, #delete_btn:hover {

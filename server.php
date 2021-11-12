@@ -7,6 +7,11 @@ include('errors.php');
 $errors = array();
 $verificationMessages = array();
 
+// Prevent user from accessing the login/register pages
+if(isset($_SESSION['username'])){
+    header('location: index.php');
+}
+
 if (isset($_POST["reg_user"])) {
     require_once "phpmailer/class.phpmailer.php";
     
@@ -95,7 +100,6 @@ if (isset($_POST["reg_user"])) {
     } catch (Exception $ex) {
         echo $ex->getMessage();
     }
-    // 
 }
 
 
