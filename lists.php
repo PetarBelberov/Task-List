@@ -21,6 +21,7 @@ require_once './config.php';
 	// connect to database
 	$db = mysqli_connect("localhost", "root", "", "todo");
 	
+	
 	$username = $_SESSION['username'];
 
     // Get Last URL Segment
@@ -50,7 +51,8 @@ require_once './config.php';
     // Task status
 	function checked($tasksRows)
 	{
-		$db = mysqli_connect("localhost", "root", "", "todo");
+		// $db = mysqli_connect('localhost', 'id17931666_root', 'bWi~76LAuS#4@n*_', 'id17931666_todo');
+		$db = mysqli_connect('localhost', 'root', '', 'todo');
 		$checked = '';
 		$tasks_done = mysqli_fetch_all(mysqli_query($db, "SELECT id FROM tasks WHERE status='done' AND id=$tasksRows"));
 		

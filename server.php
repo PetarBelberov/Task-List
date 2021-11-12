@@ -67,11 +67,11 @@ if (isset($_POST["reg_user"])) {
                 
                 $mail = new PHPMailer();
                 $mail->isSMTP();
-                $mail->Host = 'smtp.mailtrap.io';
+                $mail->Host = 'mail.lucierre.com';
                 $mail->SMTPAuth = true;
-                $mail->Port = 2525;
-                $mail->Username = 'edb73ed32e8f83';
-                $mail->Password = '671341dd0f0a45';// set the SMTP port for the GMX server
+                $mail->Port = 587;
+                $mail->Username = 'contact@lucierre.com';
+                $mail->Password = 'G}uhn?o!4:etZhqi'; // set the SMTP port for the GMX server
                 
 
                 $mail->SetFrom('mailtrap', 'Task List Verification');
@@ -106,7 +106,7 @@ if (isset($_POST["reg_user"])) {
 include('errors.php');
 $errors = array();
 
-$db = mysqli_connect('localhost', 'root', '', 'todo');
+$db = mysqli_connect("localhost", "root", "", "todo");
 
 if (isset($_POST['login_user'])) {
     

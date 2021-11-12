@@ -59,7 +59,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `hash` varchar(500) NOT NULL,
-  `status` text NOT NULL DEFAULT 'not approved'
+  `status` varchar(20) NOT NULL DEFAULT 'not approved'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
