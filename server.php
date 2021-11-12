@@ -133,8 +133,7 @@ if (isset($_POST['login_user'])) {
         
         if (mysqli_num_rows($results) == 1 && $verifyPass) {
             $_SESSION['username'] = $username;
-            $_SESSION['success'] = "You are now logged in";
-            header('location: ' . $_SERVER['REQUEST_URI']);
+            header('location: ' . 'index.php');
         }
         else {
             array_push($errors, "Wrong username/password combination");

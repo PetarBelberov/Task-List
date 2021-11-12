@@ -5,7 +5,3 @@
   	<?php endforeach ?>
   </div>
 <?php  endif ?>
-  
- 
-  
-

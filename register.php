@@ -1,6 +1,4 @@
-<?php include('server.php'); ?>
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>Registration system PHP and MySQL</title>
@@ -10,8 +8,8 @@
   <div class="header">
   	<h2>Register</h2>
   </div>
-	
   <form method="post" action="register.php" class="access-form">
+  	<?php include('server.php'); ?>
 	<?php include('verificationMessage.php'); ?>
   	<div class="input-group">
   	  <label>Username</label>

@@ -27,9 +27,10 @@ require_once './config.php';
     $lastUriSegment = array_pop($uriSegments);    
 
 
-    $listQueryName = mysqli_query($db, "SELECT name FROM lists WHERE id='$lastUriSegment'");
-	$listName = mysqli_fetch_row($listQueryName);
-	$listName = $listName[0];
+    $listQuery = mysqli_query($db, "SELECT id,name FROM lists WHERE id='$lastUriSegment'");
+	$listName = mysqli_fetch_row($listQuery);
+	$idList = $listName[0];
+	$listName = $listName[1];
   
 
     // edit task GET Request
@@ -61,7 +62,7 @@ require_once './config.php';
 
 		mysqli_query($db, "UPDATE tasks SET task = '$task', description = '$description' WHERE id = $id");
 		
-		header('location: ' . $_SERVER['REQUEST_URI']);
+		header('location: ../lists.php/' . $idList);
 	}
 	include_once 'templates/edit.php';
     ?>

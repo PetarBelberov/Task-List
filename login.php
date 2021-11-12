@@ -13,9 +13,7 @@
 	</header>
 	 
   <form method="post" action="login.php" class="access-form">
-  	<?php if (isset($errors)) { ?>
-		<p><?php echo $errors; ?></p>
-	<?php } ?>
+	<?php  include "errors.php" ?>
   	<div class="input-group">
   		<label>Username</label>
   		<input type="text" name="username" >
