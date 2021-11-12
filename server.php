@@ -95,7 +95,6 @@ if (isset($_POST["reg_user"])) {
                 $msgType = "warning";
                 array_push($verificationMessages, "Failed to create User");
             }
-            header('location: ' . $_SERVER['REQUEST_URI']);
         }
     } catch (Exception $ex) {
         echo $ex->getMessage();

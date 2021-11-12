@@ -1,6 +1,3 @@
-
-<?php include_once "templates/header.php"; ?>
-
 <?php if ($msg <> "") { ?>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -14,5 +11,3 @@
    <?php } ?> 
   </div>
 <?php } ?>
-
-<?php include_once "templates/footer.php"; ?>
